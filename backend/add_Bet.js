@@ -10,11 +10,8 @@ function addBet(user_Id, session_Id, choice, bet_Amount) {
     db.run(query, [user_Id, session_Id, choice, bet_Amount], function(err) {
         if (err) {
             console.log('Error adding bet', err);
-        } else {
-            console.log('Bet added');
         }
     });
 
-    db.close();
 }
     module.exports = { addBet };

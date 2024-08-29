@@ -13,15 +13,9 @@ function createUser(user_name) {
     db.run(query, [user_id, user_name, 100], function(err) {
         if (err) {
             console.log('Error creating user', err);
-        } else {
-            console.log('User created');
         }
     });
-
-    db.close();
-
-    return user_id;
-
+    return user_id;    
 }
 
 module.exports = { createUser };

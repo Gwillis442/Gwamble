@@ -13,8 +13,6 @@ function createSession(user_Id, session_Name, choice_A, choice_B, min_Bet, max_B
     db.run(query1, [session_Id, user_Id, 1], function(err) {
         if (err) {
             console.log('Error creating session', err);
-        } else {
-            console.log('Session created');
         }
     });
 
@@ -26,13 +24,10 @@ function createSession(user_Id, session_Name, choice_A, choice_B, min_Bet, max_B
     db.run(query2, [session_Id, session_Name, choice_A, choice_B, min_Bet, max_Bet], function(err) {
         if (err) {
             console.log('Error creating session info', err);
-        } else {
-            console.log('Session info created');
         }
+        
     });
-
-    db.close();
-
+    
     return session_Id;
   };
 

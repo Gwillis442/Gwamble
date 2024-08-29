@@ -1,44 +1,80 @@
-
-
 const sqlite3 = require('sqlite3').verbose();
 const db = new sqlite3.Database('../database/gwambleDB.db');
 
-function getSessionId(user_Id) {
-    const query = 
-        `SELECT session_id 
-        FROM session 
-        WHERE owner_id = ?`
-        ;
-
-    db.get(query, [user_Id], function(err, row) {
-        if (err) {
-            console.log('Error getting session id', err);
-        } else {
-            console.log('Session id:', row.session_id);
-        }
+function getSessionInfo(session_id) {
+    return new Promise((resolve, reject) => {
+        const query = `SELECT * FROM session_info WHERE session_id = ?`;
+        console.log('Executing query:', query, 'with session_id:', session_id);
+        db.get(query, [session_id], (err, row) => {
+            if (err) {
+                console.log('Error getting session info', err);
+                reject(err);
+            } else {
+                resolve(row);
+            }
+        });
     });
-
-    db.close();
-
-    return row.session_Id;
 }
 
-function getOwnerId(session_Id) {
-    const query = 
-        `SELECT owner_id 
-        FROM session 
-        WHERE session_id = ?`
-        ;
-
-    db.get(query, [session_Id], function(err, row) {
-        if (err) {
-            console.log('Error getting owner id', err);
-        } else {
-            console.log('Owner id:', row.owner_id);
-        }
+function getUserInfo(user_id) {
+    return new Promise((resolve, reject) => {
+        const query = `SELECT * FROM users WHERE user_id = ?`;
+        console.log('Executing query:', query, 'with user_id:', user_id);
+        db.get(query, [user_id], (err, row) => {
+            if (err) {
+                console.log('Error getting user info', err);
+                reject(err);
+            } else {
+                resolve(row);
+            }
+        });
     });
-
-    db.close();
-
-    return row.owner_Id;
 }
+
+function getUserBet(user_id) {
+    return new Promise((resolve, reject) => {
+        const query = `SELECT * FROM session_bets WHERE user_id = ?`;
+        console.log('Executing query:', query, 'with user_id:', user_id);
+        db.all(query, [user_id], (err, rows) => {
+            if (err) {
+                console.log('Error getting user bet', err);
+                reject(err);
+            } else {
+                resolve(rows);
+            }
+        });
+    });    
+}
+
+function getSessionBets(session_id) {
+    return new Promise((resolve, reject) => {
+        const query = `SELECT * FROM session_bets WHERE session_id = ?`;
+        console.log('Executing query:', query, 'with session_id:', session_id);
+        db.all(query, [session_id], (err, rows) => {
+            if (err) {
+                console.log('Error getting session bets', err);
+                reject(err);
+            } else {
+                resolve(rows);
+            }
+        });
+    });
+    
+}
+
+function getBetInfo() {
+    return new Promise((resolve, reject) => {
+        const query = `SELECT * FROM session_bets`;
+        console.log('Executing query:', query);
+        db.all(query, (err, rows) => {
+            if (err) {
+                console.log('Error getting bet info', err);
+                reject(err);
+            } else {
+                resolve(rows);
+            }
+        });
+    });
+}
+
+module.exports = { getSessionInfo, getUserInfo, getUserBet, getSessionBets, getBetInfo };
