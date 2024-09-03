@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const { create_Session } = require('./api/create_Session');
-const { create_User } = require('./api/generate_User_Id');
+const { createUser } = require('./api/generate_User_Id');
 const { add_Bet } = require('./api/add_Bet');
 const { getSessionInfo, getUserInfo, getUserBet, getSessionBets, getBetInfo } = require('./api/get_Data');
 
@@ -12,7 +12,7 @@ app.use(bodyParser.json());
 
 app.post('/api/createUser', async (req, res) => {
     try {
-        const user = create_User(req.body.user_id, req.body.user_name, req.body.coin_count);
+        const user = createUser(req.body.user_id, req.body.user_name, req.body.coin_count);
         res.send(user);
     } catch (err) {
         res.send('Error creating user');
