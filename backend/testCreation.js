@@ -2,7 +2,6 @@
 const { createSession } = require('./create_Session');
 const { createUser } = require('./generate_User_Id');
 const { addBet } = require('./add_Bet');
-const { testGet } = require('./testGet');
 
 const testUser = 'Test User';
 let user;
@@ -14,7 +13,7 @@ function testUserCreation() {
 }
 
 function testSessionCreation() {
-    session_Id = createSession(user, 'Test Session', 'Choice A', 'Choice B', 1, 100); // Session created, Session info created
+    session_Id = createSession(user, 'Test Session', 'Choice A', 'Choice B', 1, 100, 1); // Session created, Session info created
     console.log('Session created:', session_Id);
 }
 

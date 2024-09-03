@@ -4,7 +4,7 @@ conn = sqlite3.connect('./gwambleDB.db')
 cursor = conn.cursor()
 
 # Execute and print results for each SELECT statement
-tables = ['users', 'session', 'session_info', 'session_bets']
+tables = ['users', 'session', 'session_bets']
 
 for table in tables:
     cursor.execute(f'delete from {table}')

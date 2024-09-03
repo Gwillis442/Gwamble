@@ -3,7 +3,7 @@ const db = new sqlite3.Database('../database/gwambleDB.db');
 
 function getSessionInfo(session_id) {
     return new Promise((resolve, reject) => {
-        const query = `SELECT * FROM session_info WHERE session_id = ?`;
+        const query = `SELECT * FROM session WHERE session_id = ?`;
         console.log('Executing query:', query, 'with session_id:', session_id);
         db.get(query, [session_id], (err, row) => {
             if (err) {

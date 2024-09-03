@@ -1,7 +1,7 @@
 const {getSessionInfo, getUserInfo, getUserBet, getSessionBets, getBetInfo} = require('./get_Data');
 
-const sessionId='3e63ca';
-const userId='0751316083bf1159';
+const sessionId='7fef33';
+const userId='5706b07d1f2c9dc7';
 
 async function testGet() {
     try{
