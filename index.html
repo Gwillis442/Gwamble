@@ -3,9 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home Page</title>
+    <title>API Test</title>
 </head>
 <body>
-    <h1>Gwambling is Fun!</h1>
+    <h1>API Test</h1>
+
+    <!-- Form to create a user -->
+    <form id="createUserForm">
+        <label for="userId">User ID:</label>
+        <input type="text" id="userId" name="userId" required>
+        <button type="submit">Create User</button>
+    </form>
+
+    <!-- Button to get user info -->
+    <button id="getUserInfoButton">Get User Info</button>
+
+    <!-- Display results -->
+    <div id="result"></div>
+
+    <script>
+        document.getElementById('createUserForm').addEventListener('submit', async (event) => {
+            event.preventDefault();
+            const userId = document.getElementById('userId').value;
+
+            try {
+                const response = await fetch('http://localhost:8080/api/createUser', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ user_id: userId })
+                });
+
+                const result = await response.text();
+                document.getElementById('result').innerText = result;
+            } catch (error) {
+                console.error('Error creating user:', error);
+                document.getElementById('result').innerText = 'Error creating user';
+            }
+        });
+
+        document.getElementById('getUserInfoButton').addEventListener('click', async () => {
+            const userId = document.getElementById('userId').value;
+
+            try {
+                const response = await fetch(`http://localhost:8080/api/getUserInfo?userId=${userId}`);
+                const result = await response.json();
+                document.getElementById('result').innerText = JSON.stringify(result, null, 2);
+            } catch (error) {
+                console.error('Error getting user info:', error);
+                document.getElementById('result').innerText = 'Error getting user info';
+            }
+        });
+    </script>
 </body>
 </html>
