@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const { create_Session } = require('./api/create_Session');
 const { createUser } = require('./api/generate_User_Id');
 const { add_Bet } = require('./api/add_Bet');
-const { getSessionInfo, getUserInfo, getUserBet, getSessionBets, getBetInfo } = require('./api/get_Data');
+const { getSessionInfo, getUserInfo, getUserBet} = require('./api/get_Data');
 
 const app = express();
 const port = 8080;

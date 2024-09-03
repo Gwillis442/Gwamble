@@ -1,5 +1,5 @@
 const sqlite3 = require('sqlite3').verbose();
-const db = new sqlite3.Database('../database/gwambleDB.db');
+const db = new sqlite3.Database('./../database/gwambleDB.db');
 
 function getSessionInfo(session_id) {
     return new Promise((resolve, reject) => {
